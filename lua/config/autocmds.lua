@@ -11,3 +11,4 @@ vim.opt_local.indentexpr = "" -- let lsp handle it
 
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+vim.diagnostic.config({ float = { border = "rounded" } })
