@@ -12,3 +12,16 @@ vim.opt_local.indentexpr = "" -- let lsp handle it
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 vim.diagnostic.config({ float = { border = "rounded" } })
+-- Set window separator characters and highlight
+vim.opt.fillchars:append({
+  horiz = "─",
+  horizup = "┴",
+  horizdown = "┬",
+  vert = "│",
+  vertleft = "┤",
+  vertright = "├",
+  verthoriz = "┼",
+})
+
+-- Highlight the window separators
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#61AFEF" })
