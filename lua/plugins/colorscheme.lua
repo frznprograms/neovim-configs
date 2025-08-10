@@ -3,7 +3,7 @@ return {
   lazy = false,
   priority = 1000,
   opts = {
-    style = "moon", -- or storm or moon
+    style = "night", -- or storm or moon
     transparent = true,
     styles = {
       sidebars = "transparent",
@@ -15,3 +15,28 @@ return {
     require("tokyonight").load()
   end,
 }
+
+--return {
+--  "rose-pine/neovim",
+--  name = "rose-pine",
+--  opts = {
+--    variant = "main",
+--    dark_variant = "main",
+--    dim_inactive_windows = true,
+--    extend_background_behind_borders = true,
+--    enable = {
+--      terminal = true,
+--      legacy_highlights = true,
+--      migrations = true,
+--    },
+--    styles = {
+--      bold = true,
+--      italic = true,
+--      transparency = false,
+--    },
+--  }, -- Added missing comma
+--  config = function(_, opts) -- Added opts parameter
+--    require("rose-pine").setup(opts) -- Setup the plugin with your options
+--    vim.cmd("colorscheme rose-pine") -- Apply the colorscheme
+--  end,
+--}
