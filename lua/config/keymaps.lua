@@ -44,7 +44,7 @@ local on_attach = function(buffnr)
   end, opts)
 
   -- molten basic keymaps
-  vim.keymap.set("n", "<localleader>m", ":MoltenEvaluateOperator<CR>", { desc = "evaluate operator", silent = true })
+  vim.keymap.set("n", "<localleader>e", ":MoltenEvaluateOperator<CR>", { desc = "evaluate operator", silent = true })
   vim.keymap.set(
     "n",
     "<localleader>os",
