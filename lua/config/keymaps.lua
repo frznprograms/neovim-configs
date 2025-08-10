@@ -1,94 +1,101 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local on_attach = function(buffnr)
-  local keymap = vim.keymap
-  local opts = { noremap = true, silent = true, buffer = buffnr }
+-- ~/.config/nvim/lua/config/keymaps.lua (LazyVim)
+-- Loaded on VeryLazy. Adds/overrides custom keymaps safely.
 
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+-- LSP on_attach: (client, bufnr) order matters!
+local opts = { noremap = true, silent = true }
 
-  -- delete a word backwards
-  vim.keymap.set("n", "dw", "vb_d")
+-- LSP basics
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
-  -- select all
-  vim.keymap.set("n", "<C-a>", "gg<S-v>G")
+-- Delete a word backwards (keep cursor at start of deleted word)
+-- "vb\"_d": visual select back to word start, delete into black‑hole register
+vim.keymap.set("n", "dw", 'vb"_d', opts)
 
-  -- jumplist
-  vim.keymap.set("n", "<C-m>", "<C-i>", opts)
+-- Select all
+vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select entire buffer", silent = true })
 
-  -- new tab
-  vim.keymap.set("n", "te", ":tabedit", opts)
-  -- tab navigation
-  vim.keymap.set("n", "<tab>", ":tabnext<CR>", opts)
-  vim.keymap.set("n", "<s-tab>", ":tabprev<CR>", opts)
+-- Jumplist helpers (optional: mirror <C-o>/<C-i>)
+vim.keymap.set("n", "[j", "<C-o>", { desc = "Jump back", silent = true })
+vim.keymap.set("n", "]j", "<C-i>", { desc = "Jump forward", silent = true })
 
-  -- Yank to system clipboard
-  vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
-  vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Yank line to system clipboard" })
+-- Tabs
+vim.keymap.set("n", "te", ":tabedit<CR>", { desc = "New tab", silent = true })
+vim.keymap.set("n", "]t", ":tabnext<CR>", { desc = "Next tab", silent = true })
+vim.keymap.set("n", "[t", ":tabprev<CR>", { desc = "Prev tab", silent = true })
 
-  -- Paste from system clipboard
-  vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
-  vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "Paste before from system clipboard" })
+-- System clipboard (overrides).
+vim.keymap.set({ "n", "v" }, "<leader>y", "+y", { desc = "Yank to system clipboard" })
+vim.keymap.set("n", "<leader>Y", "+Y", { desc = "Yank line to system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>p", "+p", { desc = "Paste from clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>P", "+P", { desc = "Paste before from clipboard" })
 
-  -- resize windows
-  vim.keymap.set("n", "<A-left>", "<C-w>>")
-  vim.keymap.set("n", "<A-right>", "<C-w><")
-  vim.keymap.set("n", "<A-up>", "<C-w>+")
-  vim.keymap.set("n", "<A-down>", "<C-w>-")
+-- Resize splits
+vim.keymap.set("n", "<M-l>", ":vertical resize +2<CR>", { desc = "Wider", silent = true })
+vim.keymap.set("n", "<M-h>", ":vertical resize -2<CR>", { desc = "Narrower", silent = true })
+vim.keymap.set("n", "<M-k>", ":resize +2<CR>", { desc = "Taller", silent = true })
+vim.keymap.set("n", "<M-j>", ":resize -2<CR>", { desc = "Shorter", silent = true })
 
-  -- diagnostic
-  vim.keymap.set("n", "<C-j>", function()
-    vim.diagnostic.jump({ count = 1, float = true })
-  end, opts)
+-- Diagnostics
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.jump({ float = true })
+end, { desc = "next diagnostic", silent = true })
 
-  -- molten basic keymaps
-  vim.keymap.set("n", "<localleader>e", ":MoltenEvaluateOperator<CR>", { desc = "evaluate operator", silent = true })
+-- Molten (guard if not installed)
+-- Molten (localleader)
+local has_molten = pcall(require, "molten")
+if has_molten then
+  vim.keymap.set(
+    "n",
+    "<localleader>e",
+    "<cmd>MoltenEvaluateOperator<CR>",
+    { desc = "Molten: eval operator", silent = true }
+  )
   vim.keymap.set(
     "n",
     "<localleader>os",
-    ":noautocmd MoltenEnterOutput<CR>",
-    { desc = "open output window", silent = true }
+    "<cmd>noautocmd MoltenEnterOutput<CR>",
+    { desc = "Molten: open output", silent = true }
   )
-
-  -- additional molten keymaps
-  vim.keymap.set("n", "<localleader>rr", ":MoltenReevaluateCell<CR>", { desc = "re-eval cell", silent = true })
+  vim.keymap.set(
+    "n",
+    "<localleader>rr",
+    "<cmd>MoltenReevaluateCell<CR>",
+    { desc = "Molten: re-eval cell", silent = true }
+  )
   vim.keymap.set(
     "v",
     "<localleader>r",
-    ":<C-u>MoltenEvaluateVisual<CR>gv",
-    { desc = "execute visual selection", silent = true }
+    "<cmd>MoltenEvaluateVisual<CR>gv",
+    { desc = "Molten: eval visual", silent = true }
   )
-  vim.keymap.set("n", "<localleader>oh", ":MoltenHideOutput<CR>", { desc = "close output window", silent = true })
-  vim.keymap.set("n", "<localleader>md", ":MoltenDelete<CR>", { desc = "delete Molten cell", silent = true })
-
-  -- quarto preview keymap
-  local quarto = require("quarto")
-  vim.keymap.set("n", "<leader>qp", quarto.quartoPreview, { silent = true, noremap = true })
-
-  local runner = require("quarto.runner")
-  vim.keymap.set("n", "<localleader>rc", runner.run_cell, { desc = "run cell", silent = true })
-  vim.keymap.set("n", "<localleader>ra", runner.run_above, { desc = "run cell and above", silent = true })
-  vim.keymap.set("n", "<localleader>rA", runner.run_all, { desc = "run all cells", silent = true })
-  vim.keymap.set("n", "<localleader>rl", runner.run_line, { desc = "run line", silent = true })
-  vim.keymap.set("v", "<localleader>r", runner.run_range, { desc = "run visual range", silent = true })
-  vim.keymap.set("n", "<localleader>RA", function()
-    runner.run_all(true)
-  end, { desc = "run all cells of all languages", silent = true })
+  vim.keymap.set("n", "<localleader>oh", "<cmd>MoltenHideOutput<CR>", { desc = "Molten: hide output", silent = true })
+  vim.keymap.set("n", "<localleader>md", "<cmd>MoltenDelete<CR>", { desc = "Molten: delete cell", silent = true })
 end
 
--- remove annoying warning at the end of jupyter notebooks
-require("lspconfig")["pyright"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    python = {
-      analysis = {
-        diagnosticSeverityOverrides = {
-          reportUnusedExpression = "none",
-        },
-      },
-    },
-  },
-})
+-- Quarto (localleader)
+local ok_quarto, quarto = pcall(require, "quarto")
+if ok_quarto then
+  vim.keymap.set("n", "<localleader>qp", quarto.quartoPreview, { desc = "Quarto preview", silent = true })
+  local ok_runner, runner = pcall(require, "quarto.runner")
+  if ok_runner then
+    vim.keymap.set("n", "<localleader>rc", function()
+      runner.run_cell()
+    end, { desc = "Quarto: run cell", silent = true })
+    vim.keymap.set("n", "<localleader>ra", function()
+      runner.run_above()
+    end, { desc = "Quarto: run above", silent = true })
+    vim.keymap.set("n", "<localleader>rA", function()
+      runner.run_all()
+    end, { desc = "Quarto: run all (file)", silent = true })
+    vim.keymap.set("n", "<localleader>rl", function()
+      runner.run_line()
+    end, { desc = "Quarto: run line", silent = true })
+    vim.keymap.set("v", "<localleader>r", function()
+      runner.run_range()
+    end, { desc = "Quarto: run visual range", silent = true })
+    vim.keymap.set("n", "<localleader>RA", function()
+      runner.run_all(true)
+    end, { desc = "Quarto: run all languages", silent = true })
+  end
+end
