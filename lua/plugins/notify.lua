@@ -7,6 +7,7 @@ return {
       render = "default",
       top_down = false, -- show at top-right
       max_width = 60,
+      background_colour = "#000000",
     },
     init = function()
       vim.notify = require("notify")
