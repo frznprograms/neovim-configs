@@ -54,7 +54,7 @@ return {
         -- Rust
         "rust-analyzer",
         -- JS/TS/React
-        "tsserver",
+        "typescript-language-server",
         -- Lua
         "lua-language-server",
       }) do
