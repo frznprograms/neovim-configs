@@ -87,39 +87,4 @@ return {
       })
     end,
   },
-
-  -- 3) LSP: Point Pyright at "./.venv" so imports/types match your project env
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        -- Ruff LSP for linting/quickfixes (works without venv, but benefits from it)
-        ruff = {},
-        -- Pyright type checker
-        pyright = {
-          -- These settings make pyright look for a venv named ".venv" in your project root.
-          settings = {
-            python = {
-              venvPath = ".", -- directory that contains the venv(s)
-              venv = ".venv", -- the specific venv name to use
-            },
-          },
-        },
-      },
-    },
-  },
-
-  -- 4) (Optional) Ensure tools are installed via Mason
-  {
-    "williamboman/mason.nvim",
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      -- pyright (LSP), ruff (linter/formatter), debugpy (debugger)
-      for _, pkg in ipairs({ "pyright", "ruff", "debugpy" }) do
-        if not vim.tbl_contains(opts.ensure_installed, pkg) then
-          table.insert(opts.ensure_installed, pkg)
-        end
-      end
-    end,
-  },
 }
