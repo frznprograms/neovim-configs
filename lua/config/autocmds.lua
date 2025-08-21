@@ -65,6 +65,13 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.cpp", "*.h" },
+  callback = function()
+    vim.cmd("Format")
+  end,
+})
+
 -- vim.api.nvim_create_autocmd("FileType", {
 -- pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
 -- callback = function()
