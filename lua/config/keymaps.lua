@@ -31,10 +31,10 @@ vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from clipboard"
 vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "Paste before from clipboard" })
 
 -- Resize splits
-vim.keymap.set("n", "<A-l>", ":vertical resize +2<CR>", { desc = "Wider", silent = true })
-vim.keymap.set("n", "<A-h>", ":vertical resize -2<CR>", { desc = "Narrower", silent = true })
-vim.keymap.set("n", "<A-k>", ":resize +2<CR>", { desc = "Taller", silent = true })
-vim.keymap.set("n", "<A-j>", ":resize -2<CR>", { desc = "Shorter", silent = true })
+vim.keymap.set("n", "<A-w>l", ":vertical resize +2<CR>", { desc = "Wider", silent = true })
+vim.keymap.set("n", "<A-w>h", ":vertical resize -2<CR>", { desc = "Narrower", silent = true })
+vim.keymap.set("n", "<A-w>k", ":resize +2<CR>", { desc = "Taller", silent = true })
+vim.keymap.set("n", "<A-w>j", ":resize -2<CR>", { desc = "Shorter", silent = true })
 
 -- Diagnostics
 vim.keymap.set("n", "]d", function()

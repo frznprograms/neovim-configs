@@ -59,17 +59,18 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "c", "cpp", "h", "javascript", "typescript", "javascriptreact", "typescriptreact" },
   callback = function()
+    vim.opt_local.indentexpr = ""
     vim.opt_local.shiftwidth = 4
     vim.opt_local.tabstop = 4
     vim.opt_local.expandtab = true
   end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.cpp", "*.h" },
-  callback = function()
-    vim.cmd("Format")
-  end,
+require("conform").setup({
+  format_on_save = {
+    lsp_fallback = true,
+    timeout_ms = 500,
+  },
 })
 
 -- vim.api.nvim_create_autocmd("FileType", {
