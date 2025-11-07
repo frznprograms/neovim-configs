@@ -2,7 +2,7 @@ return {
   {
     "rcarriga/nvim-notify",
     opts = {
-      timeout = 8000, -- stay longer
+      timeout = 6000, -- stay longer
       stages = "fade", -- smooth
       render = "default",
       top_down = false, -- show at top-right

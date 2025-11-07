@@ -39,17 +39,5 @@ return {
       end,
       desc = "Explorer Neo-tree (cwd)",
     },
-    -- Optional: a separate key to open at project root if you still want that
-    -- {
-    --   "<leader>E",
-    --   function()
-    --     require("neo-tree.command").execute({
-    --       source = "filesystem",
-    --       toggle = true,
-    --       dir = require("lazyvim.util").get_root(),
-    --     })
-    --   end,
-    --   desc = "Explorer Neo-tree (project root)",
-    -- },
   },
 }

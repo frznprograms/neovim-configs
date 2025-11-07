@@ -37,35 +37,4 @@ return {
       }
     end,
   },
-
-  -- Ensure tools are installed via Mason
-  {
-    "mason-org/mason.nvim",
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-
-      for _, pkg in ipairs({
-        -- Python
-        "pyright",
-        -- "ruff",
-        -- "debugpy",
-        "black",
-        -- C/C++
-        "clangd",
-        "clang-format",
-        -- Rust
-        "rust-analyzer",
-        -- JS/TS/React
-        "typescript-language-server",
-        "prettier",
-        -- Lua
-        "lua-language-server",
-        "stylua",
-      }) do
-        if not vim.tbl_contains(opts.ensure_installed, pkg) then
-          table.insert(opts.ensure_installed, pkg)
-        end
-      end
-    end,
-  },
 }

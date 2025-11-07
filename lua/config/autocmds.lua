@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "c", "cpp", "h", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+  pattern = { "c", "cpp", "h" },
   callback = function()
     vim.opt_local.indentexpr = ""
     vim.opt_local.shiftwidth = 4
@@ -72,11 +72,3 @@ require("conform").setup({
     timeout_ms = 500,
   },
 })
-
--- vim.api.nvim_create_autocmd("FileType", {
--- pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
--- callback = function()
--- vim.opt_local.shiftwidth = 2
--- vim.opt_local.tabstop = 2
--- end,
--- })
