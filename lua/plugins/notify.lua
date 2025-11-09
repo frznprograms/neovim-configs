@@ -1,6 +1,8 @@
 return {
+  -- Notify UI
   {
     "rcarriga/nvim-notify",
+    lazy = true, -- let Noice load it when needed
     opts = {
       timeout = 6000, -- stay longer
       stages = "fade", -- smooth
@@ -9,21 +11,25 @@ return {
       max_width = 60,
       background_colour = "#000000",
     },
-    init = function()
-      vim.notify = require("notify")
-    end,
   },
-  {
-    "folke/noice.nvim",
-    opts = {
-      presets = { lsp_doc_border = true },
-      lsp = { progress = { enabled = true } },
-      messages = { view_search = false },
-      -- optional: route annoying "written" messages to mini view
-      routes = {
-        { filter = { event = "msg_show", kind = "search_count" }, view = "mini" },
-        { filter = { event = "msg_show", find = "written" }, view = "mini" },
-      },
-    },
-  },
+  --
+  --   -- Noice (message router + LSP UI)
+  --   {
+  --     "folke/noice.nvim",
+  --     event = "VeryLazy",
+  --     dependencies = {
+  --       "MunifTanjim/nui.nvim",
+  --       "rcarriga/nvim-notify", -- make sure Notify is available
+  --     },
+  --     opts = {
+  --       presets = { lsp_doc_border = true },
+  --       lsp = { progress = { enabled = true } },
+  --       messages = { view_search = false },
+  --       routes = {
+  --         { filter = { event = "msg_show", kind = "search_count" }, view = "mini" },
+  --         { filter = { event = "msg_show", find = "written" }, view = "mini" },
+  --       },
+  --     },
+  --   },
+  -- }
 }

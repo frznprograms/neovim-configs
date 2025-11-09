@@ -36,6 +36,10 @@ return {
         or nil
 
       return {
+        indent = {
+          scope = { enabled = true },
+        },
+        scroll = { enabled = true },
         terminal = {
           win = {
             position = "float",

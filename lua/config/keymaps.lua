@@ -36,6 +36,11 @@ vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "Paste before from cli
 -- vim.keymap.set("n", "<A-w>k", ":resize +2<CR>", { desc = "Taller", silent = true })
 -- vim.keymap.set("n", "<A-w>j", ":resize -2<CR>", { desc = "Shorter", silent = true })
 
+-- Telescope live_multigrep
+vim.keymap.set("n", "<leader>mg", function()
+  require("plugins.telescope_multigrep").live_multigrep()
+end, { desc = "Telescope: Multi grep" })
+
 -- Diagnostics
 vim.keymap.set("n", "]d", function()
   vim.diagnostic.jump({ float = true })

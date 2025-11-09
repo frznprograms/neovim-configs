@@ -1,6 +1,6 @@
 return {
   { "mason-org/mason-lspconfig.nvim", opts = { ensure_installed = { "gopls" } } },
-  { "mason-org/mason.nvim", opts = { ensure_installed = { "goimports" } } },
+  { "mason-org/mason.nvim", opts = { ensure_installed = { "goimports", "gofumpt" } } },
   {
     "neovim/nvim-lspconfig",
     ft = "go",
