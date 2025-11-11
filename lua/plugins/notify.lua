@@ -4,7 +4,7 @@ return {
     "rcarriga/nvim-notify",
     lazy = true, -- let Noice load it when needed
     opts = {
-      timeout = 6000, -- stay longer
+      timeout = 3000, -- stay longer
       stages = "fade", -- smooth
       render = "default",
       top_down = false, -- show at top-right

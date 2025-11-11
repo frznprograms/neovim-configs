@@ -67,31 +67,3 @@ if has_molten then
   vim.keymap.set("n", "<localleader>oh", ":MoltenHideOutput<CR>", { desc = "Molten: hide output", silent = true })
   vim.keymap.set("n", "<localleader>md", ":MoltenDelete<CR>", { desc = "Molten: delete cell", silent = true })
 end
-
--- Quarto (localleader)
-local has_quarto, quarto = pcall(require, "quarto")
-if has_quarto then
-  vim.keymap.set("n", "<localleader>qp", quarto.quartoPreview, { desc = "Quarto preview", silent = true })
-  local ok_runner, runner = pcall(require, "quarto.runner")
-  if ok_runner then
-    vim.keymap.set("n", "<localleader>rc", runner.run_cell, { desc = "Quarto: run cell", silent = true })
-    vim.keymap.set("n", "<localleader>ra", runner.run_above, { desc = "Quarto: run above", silent = true })
-    vim.keymap.set("n", "<localleader>rA", runner.run_all, { desc = "Quarto: run all", silent = true })
-    vim.keymap.set("n", "<localleader>rl", runner.run_line, { desc = "Quarto: run line", silent = true })
-    vim.keymap.set("n", "<localleader>RA", function()
-      runner.run_all(true)
-    end, { desc = "Quarto: run all languages", silent = true })
-  end
-end
-
-vim.keymap.set("v", "<localleader>r", function()
-  local ok, runner = pcall(require, "quarto.runner")
-  if ok then
-    local ran = pcall(runner.run_range)
-    if ran then
-      return
-    end
-  end
-  -- fallback: run exactly what you selected via Molten
-  vim.cmd(":<C-u>MoltenEvaluateVisual")
-end, { silent = true, desc = "Run visual range (Quarto cell or raw via Molten)" })
