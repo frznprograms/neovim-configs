@@ -42,11 +42,11 @@ return {
         scroll = { enabled = true },
         terminal = {
           win = {
-            position = "float",
+            position = "bottom",
             border = "rounded",
-            height = 0.8,
-            width = 0.7,
-            backdrop = 50,
+            height = 0.5,
+            -- width = 0.7,
+            -- backdrop = 50,
             style = "minimal",
             relative = "editor",
             title = "Terminal",
