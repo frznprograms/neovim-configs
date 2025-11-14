@@ -44,7 +44,7 @@ return {
           win = {
             position = "bottom",
             border = "rounded",
-            height = 0.5,
+            height = 0.70,
             -- width = 0.7,
             -- backdrop = 50,
             style = "minimal",
