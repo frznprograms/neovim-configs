@@ -67,3 +67,19 @@ if has_molten then
   vim.keymap.set("n", "<localleader>oh", ":MoltenHideOutput<CR>", { desc = "Molten: hide output", silent = true })
   vim.keymap.set("n", "<localleader>md", ":MoltenDelete<CR>", { desc = "Molten: delete cell", silent = true })
 end
+
+-- Rust keymaps
+-- Show hover info manually
+vim.keymap.set("n", "K", function()
+  vim.cmd.RustLsp({ "hover", "actions" })
+end, { desc = "Rust Hover" })
+
+-- Trigger signature help manually
+vim.keymap.set("n", "<leader>rs", function()
+  vim.cmd.RustLsp("signature_help")
+end, { desc = "Rust Signature Help" })
+
+-- Toggle inlay hints manually
+vim.keymap.set("n", "<leader>rh", function()
+  vim.cmd.RustLsp("toggle_inlay_hints")
+end, { desc = "Toggle Rust Inlay Hints" })
