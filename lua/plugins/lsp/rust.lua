@@ -1,23 +1,46 @@
 return {
-  { "mason-org/mason-lspconfig.nvim", opts = { ensure_installed = { "rust_analyzer" } } },
   {
-    "neovim/nvim-lspconfig",
-    ft = "rust",
-    opts = function(_, opts)
-      opts.servers = opts.servers or {}
-      opts.servers.rust_analyzer = {
-        settings = {
-          ["rust-analyzer"] = {
-            checkOnSave = { command = "clippy" }, -- example: run clippy on save
-            diagnostics = { disabled = { "unresolved-proc-macro" } },
+    "mrcjkb/rustaceanvim",
+    version = "latest",
+
+    ft = { "rust" },
+
+    config = function()
+      vim.g.rustaceanvim = {
+        tools = {
+          -- Disable noisy automatic features
+          hover_actions = { auto_focus = false },
+          inlay_hints = {
+            auto = false, -- disable auto inlay hints
           },
         },
-        on_attach = function(client, bufnr)
-          client.server_capabilities.documentFormattingProvider = false -- disable rust-analyzer formatting
-        end,
+
+        server = {
+          on_attach = function(client, bufnr)
+            -- Disable LSP formatting (we use rustfmt via conform)
+            client.server_capabilities.documentFormattingProvider = false
+          end,
+          settings = {
+            ["rust-analyzer"] = {
+              checkOnSave = {
+                command = "clippy",
+              },
+              -- disable hover popups automatically
+              hover = { enable = false },
+              -- disable signature help popups automatically
+              signatureHelp = { enable = false },
+              inlayHints = { enable = false },
+              diagnostics = {
+                disabled = { "unresolved-proc-macro" },
+              },
+            },
+          },
+        },
       }
     end,
   },
+
+  -- Formatting (rustfmt)
   {
     "stevearc/conform.nvim",
     ft = "rust",
