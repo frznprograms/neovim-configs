@@ -3,7 +3,7 @@
 
 vim.g.maplocalleader = "\\"
 -- only for the rose pine theme
-vim.opt.pumblend = 12
+vim.opt.pumblend = 10
 -- for indent guides
 vim.g.lazyvim_indent_scope_enabled = true
 -- set custom cursor

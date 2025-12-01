@@ -13,7 +13,7 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 vim.keymap.set("n", "dw", 'vb"_d', opts)
 
 -- Select all
-vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select entire buffer", silent = true })
+-- vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select entire buffer", silent = true })
 
 -- Jumplist helpers (optional: mirror <C-o>/<C-i>)
 vim.keymap.set("n", "[j", "<C-o>", { desc = "Jump back", silent = true })
@@ -31,10 +31,10 @@ vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from clipboard"
 vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "Paste before from clipboard" })
 
 -- Resize splits
--- vim.keymap.set("n", "<A-w>l", ":vertical resize +2<CR>", { desc = "Wider", silent = true })
--- vim.keymap.set("n", "<A-w>h", ":vertical resize -2<CR>", { desc = "Narrower", silent = true })
--- vim.keymap.set("n", "<A-w>k", ":resize +2<CR>", { desc = "Taller", silent = true })
--- vim.keymap.set("n", "<A-w>j", ":resize -2<CR>", { desc = "Shorter", silent = true })
+vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Resize window 2 clicks up" })
+vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Resize window 2 clicks down" })
+vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Resize window 2 clicks left" })
+vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Resize window 2 clicks right" })
 
 -- Telescope live_multigrep
 vim.keymap.set("n", "<leader>mg", function()
