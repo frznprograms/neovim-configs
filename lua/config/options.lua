@@ -2,10 +2,13 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 
 vim.g.maplocalleader = "\\"
+
 -- only for the rose pine theme
 vim.opt.pumblend = 10
+
 -- for indent guides
 vim.g.lazyvim_indent_scope_enabled = true
+
 -- set custom cursor
 vim.opt.guicursor = table.concat({
   "n-v-c:block", -- normal, visual, command → block

@@ -40,11 +40,12 @@ return {
           scope = { enabled = true },
         },
         scroll = { enabled = true },
+        bigfile = { enabled = true },
         terminal = {
           win = {
             position = "bottom",
             border = "rounded",
-            height = 0.70,
+            height = 0.60,
             -- width = 0.7,
             -- backdrop = 50,
             style = "minimal",
