@@ -8,3 +8,7 @@ vim.opt.guicursor = table.concat({
   "r-cr:hor20",                                 -- replace modes → horizontal bar
   "o:hor50",                                    -- operator-pending → thicker bar
 }, ",")
+
+-- enable text wrapping
+vim.opt.wrap = true
+vim.opt.linebreak = true
