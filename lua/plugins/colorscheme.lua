@@ -18,7 +18,7 @@ return {
       transparency = true,
     },
   },
-  config = function(_, opts) -- Added opts parameter
+  config = function(_, opts)         -- Added opts parameter
     require("rose-pine").setup(opts) -- Setup the plugin with your options
     vim.cmd("colorscheme rose-pine") -- Apply the colorscheme
   end,

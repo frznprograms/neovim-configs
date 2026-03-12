@@ -30,3 +30,25 @@ return {
     },
   },
 }
+-- {
+--   "neovim/nvim-lspconfig",
+--   opts = {
+--     servers = {
+--       basedpyright = {
+--         settings = {
+--           basedpyright = {},
+--           python = {
+--             analysis = {
+--               typeCheckingMode = "basic",
+--               autoSearchPaths = true,
+--               diagnosticMode = "workspace",
+--             },
+--             -- One of these patterns usually fixes venv package resolution:
+--             -- venvPath = vim.fn.expand("~/.virtualenvs"), -- if you store envs here
+--             venv = ".venv", -- if each project uses ./\.venv
+--           },
+--         },
+--       },
+--     },
+--   },
+-- }
