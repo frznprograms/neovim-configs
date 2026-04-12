@@ -8,7 +8,7 @@ return {
         indent = {
           scope = { enabled = true },
         },
-        scroll = { enabled = true },
+        scroll = { enabled = false },
         bigfile = { enabled = true },
         terminal = {
           win = {
