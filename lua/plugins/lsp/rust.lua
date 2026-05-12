@@ -24,10 +24,6 @@ return {
     opts = function(_, opts)
       opts.formatters_by_ft = opts.formatters_by_ft or {}
       opts.formatters_by_ft.rust = { "rustfmt" }
-      opts.format_on_save = {
-        timeout_ms = 1500,
-        lsp_fallback = true,
-      }
     end,
   },
 }

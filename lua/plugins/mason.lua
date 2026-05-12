@@ -8,16 +8,15 @@ return {
       vim.list_extend(opts.ensure_installed, {
         -- LSP servers
         "rust-analyzer",
-        "pyright",
+        "basedpyright",
         "lua-language-server",
         "gopls",
         "clangd",
-        "jsonls",
+        "json-lsp",
 
         -- Formatters
         "stylua",
         "ruff",
-        "rustfmt",
         "gofumpt",
         "goimports",
         "clang-format",
